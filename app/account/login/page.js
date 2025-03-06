@@ -7,6 +7,8 @@ import { Label } from "@/components/ui/label";
 import { AlertCircle, Loader2, Lock, Mail } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { FormField } from "./components/FormField";
+import { AuthProviders } from "./components/AuthProviders";
 
 export default function LoginPage() {
     const [isLoading, setIsLoading] = useState(false);
