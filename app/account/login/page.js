@@ -45,7 +45,7 @@ export default function LoginPage() {
   
         // On success, redirect to dashboard
         console.log("Login successful with data:", loginData);
-        router.push("/");
+        router.push("/vendors/list");
       } catch (error) {
         setLoginError(
           error instanceof Error ? error.message : "An unexpected error occurred"
