@@ -8,7 +8,7 @@ import { UserListTable } from './components/UserListTable';
 export default function CustomerListPage() {
   return (
     <div className="container mx-auto py-8 px-4">
-      <h1 className="text-3xl font-bold tracking-tight mb-8">User Management</h1>
+      <h1 className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-transparent bg-clip-text mb-8">User Management</h1>
       
       <Suspense fallback={<div>Loading stats...</div>}>
         <UserStats />
