@@ -67,10 +67,10 @@ export default function FinancialInsights({
               <span className="text-gray-600">Total Sales</span>
               <span className="font-medium">₹{vendor.totalSales.toLocaleString()}</span>
             </div>
-            <div className="flex justify-between items-center">
+            {/* <div className="flex justify-between items-center">
               <span className="text-gray-600">Platform Fees (5%)</span>
               <span className="font-medium text-red-500">-₹{platformFees.toLocaleString()}</span>
-            </div>
+            </div> */}
             <Separator className="my-1" />
             <div className="flex justify-between items-center font-semibold">
               <span>Final Amount</span>

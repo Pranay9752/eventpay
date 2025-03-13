@@ -84,10 +84,10 @@ export const VendorCards = ({
                 </div>
                 
                 <div className="mt-4 space-y-2">
-                  <div className="flex justify-between text-sm">
+                  {/* <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Pending payout:</span>
                     <span className="font-medium">{formatCurrency(vendor.pendingPayout)}</span>
-                  </div>
+                  </div> */}
                   <div className="flex justify-between text-sm">
                     <span className="text-gray-500">Last transaction:</span>
                     <span className="font-medium">{formatDate(vendor.lastTransaction)}</span>

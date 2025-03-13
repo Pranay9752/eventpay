@@ -13,7 +13,7 @@ export const StatsCards = ({ vendors }) => {
       { title: "Total Vendors", value: totalVendors, icon: <Users className="h-5 w-5 text-blue-500" />, color: "blue" },
       { title: "Total Transactions", value: totalTransactions, icon: <ShoppingBag className="h-5 w-5 text-purple-500" />, color: "purple" },
       { title: "Total Revenue", value: formatCurrency(totalRevenue), icon: <TrendingUp className="h-5 w-5 text-green-500" />, color: "green" },
-      { title: "Pending Payouts", value: formatCurrency(totalPending), icon: <Wallet className="h-5 w-5 text-amber-500" />, color: "amber" },
+      // { title: "Pending Payouts", value: formatCurrency(totalPending), icon: <Wallet className="h-5 w-5 text-amber-500" />, color: "amber" },
     ];
   
     return (

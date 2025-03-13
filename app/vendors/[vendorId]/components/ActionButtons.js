@@ -17,7 +17,7 @@ export default function ActionButtons({ vendorId }) {
   return (
     <div className="flex flex-wrap gap-3">
       {/* Settle Payout - Uses a form submission */}
-      <form action={settlePayout.bind(null, vendorId)}>
+      {/* <form action={settlePayout.bind(null, vendorId)}>
         <Button 
           type="submit"
           className="bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-700 hover:to-indigo-700"
@@ -25,7 +25,7 @@ export default function ActionButtons({ vendorId }) {
           <CreditCard className="mr-2 h-4 w-4" />
           Settle Payout
         </Button>
-      </form>
+      </form> */}
 
       {/* Export Report (Handled on client, no backend needed) */}
       <Button variant="outline" >

@@ -63,7 +63,7 @@ export default function VendorProfileHeader({
           
           {/* Stats cards section - desktop layout */}
           <div className="hidden md:flex flex-1 justify-end items-center mt-3">
-            <div className="grid grid-cols-4 gap-3 w-full max-w-3xl">
+            <div className="grid grid-cols-3 gap-3 w-full max-w-3xl">
               <StatCard 
                 icon={<ShoppingBag className="w-5 h-5" />}
                 label="Transactions"
@@ -76,12 +76,12 @@ export default function VendorProfileHeader({
                 value={`₹${vendor.totalSales.toLocaleString()}`}
                 color="bg-purple-500"
               />
-              <StatCard 
+              {/* <StatCard 
                 icon={<Activity className="w-5 h-5" />}
                 label="Pending Payout"
                 value={`₹${vendor.pendingPayout.toLocaleString()}`}
                 color="bg-pink-500"
-              />
+              /> */}
               <StatCard 
                 icon={<Clock className="w-5 h-5" />}
                 label="Last Transaction"
@@ -106,12 +106,12 @@ export default function VendorProfileHeader({
             value={`₹${vendor.totalSales.toLocaleString()}`}
             color="bg-purple-500"
           />
-          <StatCard 
+          {/* <StatCard 
             icon={<Activity className="w-5 h-5" />}
             label="Pending Payout"
             value={`₹${vendor.pendingPayout.toLocaleString()}`}
             color="bg-pink-500"
-          />
+          /> */}
           <StatCard 
             icon={<Clock className="w-5 h-5" />}
             label="Last Transaction"
