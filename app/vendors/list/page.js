@@ -1,5 +1,9 @@
+'use client';
+import { RefreshCw } from "lucide-react";
 import { StatsCards } from "./components/StatsCards";
 import { VendorManagementDashboard } from "./components/VendorDashboard";
+import { Button } from "@/components/ui/button";
+import AddVendorDialog from "./components/AddVendorDialog";
 
 // import { DatePickerWithRange } from '@/components/ui/date-range-picker'; // Assuming this component exists
 
@@ -366,10 +370,18 @@ const VendorsListPage = ({ initialVendors }) => {
       location: "Outdoor Area",
     },
   ];
+
+  const handleVendorAdded = async () => {
+
+  };
+
+  const handleRefresh = async () => {
+
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
       <div className="container mx-auto py-8 px-4">
-        <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
+        {/* <div className="flex flex-col md:flex-row justify-between items-start md:items-center mb-8 gap-4">
           <div>
             <h1 className="text-3xl font-extrabold bg-gradient-to-r from-purple-600 to-indigo-600 text-transparent bg-clip-text">
               Vendors List
@@ -377,6 +389,30 @@ const VendorsListPage = ({ initialVendors }) => {
             <p className="text-gray-500 dark:text-gray-400 mt-1">
               Manage and track all your event vendors in one place
             </p>
+          </div>
+        </div> */}
+        <div className="flex justify-between items-center mb-6">
+          <div>
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
+              Vendor Management
+            </h1>
+            <p className="text-gray-500 dark:text-gray-400 mt-1">
+              Manage your vendor accounts and relationships
+            </p>
+          </div>
+          <div className="flex items-center gap-3">
+            <Button
+              variant="outline"
+              size="sm"
+              onClick={handleRefresh}
+              className="flex items-center gap-2"
+            >
+              <RefreshCw
+                className={`h-4 w-4 `}
+              />
+              Refresh
+            </Button>
+            <AddVendorDialog onVendorAdded={handleVendorAdded} />
           </div>
         </div>
         <StatsCards vendors={vendors} />
