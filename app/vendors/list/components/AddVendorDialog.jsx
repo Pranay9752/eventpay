@@ -25,7 +25,7 @@ const VendorSchema = z.object({
     .regex(/^\d{10}$/, 'Phone number must be 10 digits'),
 });
 
-export function AddVendorDialog({ onVendorAdded }) {
+export function AddVendorDialog() {
   const [open, setOpen] = useState(false);
 
   const {
@@ -45,7 +45,6 @@ export function AddVendorDialog({ onVendorAdded }) {
         toast({ title: 'Success', description: 'Vendor created successfully!' });
         reset();
         setOpen(false);
-        onVendorAdded?.();
       } else {
         toast({
           title: 'Error',

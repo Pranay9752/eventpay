@@ -5,7 +5,7 @@ import { revalidatePath } from "next/cache";
 export async function createVendor(vendorData) {
   try {
     const response = await fetch(
-      "https://nfc-production-05c2.up.railway.app/vendor/createVendor",
+      "https://nfcbackend-production.up.railway.app/vendor/createVendor",
       {
         method: "POST",
         headers: {
@@ -39,5 +39,27 @@ export async function createVendor(vendorData) {
       message:
         error instanceof Error ? error.message : "Failed to create vendor",
     };
+  }
+}
+
+export async function fetchVendors() {
+  try {
+    const res = await fetch(
+      "https://nfcbackend-production.up.railway.app/api/vendor/list",
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
+
+    if (!res.ok) throw new Error("Failed to fetch vendor list");
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching vendors:", error);
+    return { error: "Could not fetch vendor list" };
   }
 }
