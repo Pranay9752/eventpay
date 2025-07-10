@@ -341,13 +341,64 @@ const dummyData = [
     location: "Outdoor Area",
   },
 ];
+
+function transformVendors(vendors) {
+  const categories = [
+    "Retail",
+    "Tech",
+    "Food & Beverage",
+    "General",
+    "Electronics",
+  ];
+  const locations = [
+    "Stall A1",
+    "Stall B2",
+    "Main Hall",
+    "Main Stage",
+    "Stall C3",
+    "Stall D4",
+    "Hall B",
+    "Stall E1",
+    "Stall E2",
+    "Stall C4",
+  ];
+  const statuses = ["active", "inactive"];
+
+  return vendors.map((vendor, index) => {
+    const randomInt = (min, max) =>
+      Math.floor(Math.random() * (max - min + 1)) + min;
+
+    const totalTransactions = randomInt(80, 350);
+    const totalSales = totalTransactions * randomInt(400, 800); // mock ₹ avg per transaction
+    const pendingPayout = totalSales - randomInt(0, totalSales * 0.1); // up to 10% already paid
+    const lastTransaction = new Date(
+      Date.now() - randomInt(0, 7 * 24 * 60 * 60 * 1000)
+    ).toISOString(); // within last 7 days
+
+    return {
+      id: vendor?.uniqueid || "",
+      name: vendor.businessname,
+      terminalId: vendor._id,
+      totalTransactions,
+      totalSales,
+      pendingPayout,
+      lastTransaction,
+      // status: statuses[index % statuses.length],
+      status: "active",
+      email: vendor?.email || "",
+      phone: vendor?.phone || "",
+      // category: categories[index % categories.length],
+      // location: locations[index % locations.length],
+    };
+  });
+}
+
 // Now this is a client component that receives server-fetched data
-const VendorsListPage = async ({ initialVendors }) => {
+const VendorsListPage = async ({}) => {
   // Sample vendor data - in real app, this would come from props (initialVendors)
-  const vendors = initialVendors || dummyData;
 
   const data = await fetchVendors();
-  console.log("data: ", data);
+  const formattedVendors = transformVendors(data?.vendors || []);
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 to-gray-100 dark:from-gray-900 dark:to-gray-800">
@@ -370,7 +421,7 @@ const VendorsListPage = async ({ initialVendors }) => {
           totalTransactions={data?.totalTransactions}
           totalVendors={data?.totalVendors}
         />
-        <VendorManagementDashboard initialVendors={data?.vendors || []} />
+        <VendorManagementDashboard initialVendors={formattedVendors} />
       </div>
     </div>
   );

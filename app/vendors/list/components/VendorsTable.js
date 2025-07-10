@@ -25,12 +25,10 @@ import {
 import { formatCurrency } from "@/lib/utils";
 import { formatDate } from "@/lib/utils";
 import Link from "next/link";
+import BulkMenuUploader from "./AddMenu";
 
-export const VendorsTable = ({
-  vendors,
-  handleSort,
-  SortIcon,
-}) => {
+export const VendorsTable = ({ vendors, handleSort, SortIcon }) => {
+  console.log('vendors: ', vendors);
   return (
     <div className="rounded-xl border border-gray-200 bg-white dark:bg-gray-800 dark:border-gray-700 overflow-hidden shadow-sm">
       <Table>
@@ -165,7 +163,11 @@ export const VendorsTable = ({
                         </div>
                         <Separator />
                         <div className="flex justify-end">
-                          <Button asChild size="sm"><Link href={`/vendors/${vendor.id}`}>View Full Details</Link></Button>
+                          <Button asChild size="sm">
+                            <Link href={`/vendors/${vendor.id}`}>
+                              View Full Details
+                            </Link>
+                          </Button>
                         </div>
                       </div>
                     </PopoverContent>
@@ -182,9 +184,14 @@ export const VendorsTable = ({
                     </DropdownMenuTrigger>
                     <DropdownMenuContent align="end">
                       <DropdownMenuItem asChild>
-                        <Link href={`/vendors/${vendor.id}`}>
-                          View Details
-                        </Link>
+                        <Link href={`/vendors/${vendor.id}`}>View Details</Link>
+                      </DropdownMenuItem>
+                      <DropdownMenuItem asChild>
+                        <BulkMenuUploader vendor_id={vendor.id}>
+                          <span className="focus:bg-accent focus:text-accent-foreground data-[variant=destructive]:text-destructive-foreground data-[variant=destructive]:focus:bg-destructive/10 dark:data-[variant=destructive]:focus:bg-destructive/40 data-[variant=destructive]:focus:text-destructive-foreground data-[variant=destructive]:*:[svg]:!text-destructive-foreground [&_svg:not([class*='text-'])]:text-muted-foreground relative flex cursor-default items-center gap-2 rounded-sm px-2 py-1.5 text-sm outline-hidden select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-50 data-[inset]:pl-8 [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4">
+                            Add Menu
+                          </span>
+                        </BulkMenuUploader>
                       </DropdownMenuItem>
                       {/* <DropdownMenuItem>Edit Vendor</DropdownMenuItem> */}
                       <DropdownMenuItem>View Transactions</DropdownMenuItem>

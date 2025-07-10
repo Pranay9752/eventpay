@@ -405,7 +405,7 @@ export const VendorManagementDashboard = ({
   ];
 
   // Determine max values for sliders
-  const maxSales = Math.max(...vendors.map((v) => v.totalSales));
+  const maxSales = Math.max(...vendors.map((v) => v?.totalSales));
   const maxTransactions = Math.max(...vendors.map((v) => v.totalTransactions));
 
   // State variables
