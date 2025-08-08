@@ -3,6 +3,7 @@ import "./globals.css";
 import { SidebarProvider, SidebarTrigger } from "@/components/ui/sidebar";
 import { AppSidebar } from "@/components/SideBar";
 import { Toaster } from "sonner";
+import ConditionalSidebar from "@/components/ConditionalSidebar";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,9 +33,10 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
         <SidebarProvider>
-          <AppSidebar />
+          {/* <AppSidebar /> */}
+          <ConditionalSidebar />
           <main className="w-full">
-            <SidebarTrigger />
+            {/* <SidebarTrigger /> */}
             {children}
           </main>
           <Toaster />

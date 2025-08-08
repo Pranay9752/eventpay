@@ -2,6 +2,7 @@
 
 import { z } from 'zod';
 import { revalidatePath } from 'next/cache';
+import { redirect } from 'next/navigation';
 
 const CreateEventSchema = z.object({
   event_name: z.string().min(1, 'Event name is required').max(100, 'Event name is too long'),
@@ -11,8 +12,6 @@ const CreateEventSchema = z.object({
   password: z.string().min(8, 'Password must be at least 8 characters'),
   phoneNo: z.string().regex(/^\d{10}$/, 'Invalid phone number format'),
 });
-
-
 
 export async function createEventAction(formData) {
   try {
@@ -36,20 +35,14 @@ export async function createEventAction(formData) {
 
     const result = await response.json();
 
-    if (!response.ok) {
-      return {
-        success: false,
-        message: result.message || `HTTP error! status: ${response.status}`,
-      };
-    }
+    // if (!response.ok) {
+    //   return {
+    //     success: false,
+    //     message: result.message || `HTTP error! status: ${response.status}`,
+    //   };
+    // }
 
-    revalidatePath('/events');
-
-    return {
-      success: true,
-      data: result,
-      message: 'Event created successfully',
-    };
+    
   } catch (error) {
     console.error('Error creating event:', error);
     return {
@@ -57,4 +50,7 @@ export async function createEventAction(formData) {
       message: error instanceof Error ? error.message : 'Failed to create event',
     };
   }
+  
+  // Redirect after successful event creation
+  redirect('/account/login');
 }
