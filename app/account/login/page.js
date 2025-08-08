@@ -118,12 +118,12 @@ export default function LoginPage() {
                 required
               />
 
-              <div className="flex items-center space-x-2">
+              {/* <div className="flex items-center space-x-2">
                 <Checkbox id="remember" name="remember" />
                 <Label htmlFor="remember" className="text-sm text-gray-600">
                   Remember me
                 </Label>
-              </div>
+              </div> */}
 
               <SubmitButton />
             </form>

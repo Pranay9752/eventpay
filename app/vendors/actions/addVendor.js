@@ -1,8 +1,14 @@
 "use server";
 
 import { revalidatePath } from "next/cache";
+import { cookies } from "next/headers";
 
 export async function createVendor(vendorData) {
+  console.log(
+    "vendorData: ",
+    vendorData,
+    (await cookies()).get("event_id").value
+  );
   try {
     const response = await fetch(
       "https://nfcbackend-production.up.railway.app/vendor/createVendor",
@@ -11,7 +17,10 @@ export async function createVendor(vendorData) {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(vendorData),
+        body: JSON.stringify({
+          ...vendorData,
+          event_id: (await cookies()).get("event_id").value,
+        }),
       }
     );
 

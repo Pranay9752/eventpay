@@ -74,7 +74,6 @@ export async function getVendorDetails(vendorId) {
   }
   
   export async function getVendorTransactions(vendorId) {
-    console.log('vendorId: ', vendorId);
     // In a real application, you would fetch this data from your API
     // For demonstration purposes, returning mock data
     const statuses = ['completed', 'failed', 'pending'];

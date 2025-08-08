@@ -398,6 +398,7 @@ const VendorsListPage = async ({}) => {
   // Sample vendor data - in real app, this would come from props (initialVendors)
 
   const data = await fetchVendors();
+  console.log('data: ', data);
   const formattedVendors = transformVendors(data?.vendors || []);
 
   return (
