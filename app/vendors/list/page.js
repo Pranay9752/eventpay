@@ -368,9 +368,7 @@ function transformVendors(vendors) {
     const randomInt = (min, max) =>
       Math.floor(Math.random() * (max - min + 1)) + min;
 
-    const totalTransactions = randomInt(80, 350);
-    const totalSales = totalTransactions * randomInt(400, 800); // mock ₹ avg per transaction
-    const pendingPayout = totalSales - randomInt(0, totalSales * 0.1); // up to 10% already paid
+    const pendingPayout =  vendor?.totalRevenue;
     const lastTransaction = new Date(
       Date.now() - randomInt(0, 7 * 24 * 60 * 60 * 1000)
     ).toISOString(); // within last 7 days
@@ -378,9 +376,10 @@ function transformVendors(vendors) {
     return {
       id: vendor?.uniqueid || "",
       name: vendor.businessname,
-      terminalId: vendor._id,
-      totalTransactions,
-      totalSales,
+      vendorId: vendor._id,
+      terminalId: vendor?.vendorId,
+      totalTransactions: vendor?.totalTransactions || 0,
+      totalSales: vendor?.totalRevenue || 0,
       pendingPayout,
       lastTransaction,
       // status: statuses[index % statuses.length],
@@ -398,7 +397,7 @@ const VendorsListPage = async ({}) => {
   // Sample vendor data - in real app, this would come from props (initialVendors)
 
   const data = await fetchVendors();
-  console.log('data: ', data);
+  console.log("data: ", data);
   const formattedVendors = transformVendors(data?.vendors || []);
 
   return (

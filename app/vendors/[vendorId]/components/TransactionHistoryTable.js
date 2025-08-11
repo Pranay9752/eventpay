@@ -41,6 +41,7 @@ import { useEffect } from "react";
 export default function TransactionHistoryTable({
   transactions,
 }) {
+  console.log('transactions: ', transactions);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [date, setDate] = useState();
@@ -52,9 +53,9 @@ export default function TransactionHistoryTable({
   // Filter the transactions based on search term, status, and date
   const filteredTransactions = transactions.filter((transaction) => {
     const matchesSearch =
-      transaction.userName.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      transaction.nfcCardId.toLowerCase().includes(searchTerm.toLowerCase()) ||
-      transaction.id.toLowerCase().includes(searchTerm.toLowerCase());
+      transaction.customer_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.card_uid.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.vendorId.toLowerCase().includes(searchTerm.toLowerCase());
 
     const matchesStatus =
       statusFilter === "all" || transaction.status === statusFilter;
@@ -168,15 +169,15 @@ export default function TransactionHistoryTable({
           <TableBody>
             {paginatedTransactions.length > 0 ? (
               paginatedTransactions.map((transaction) => (
-                <TableRow key={transaction.id} className="hover:bg-gray-50">
+                <TableRow key={transaction._id} className="hover:bg-gray-50">
                   <TableCell className="font-medium">
                     {transaction.id}
                   </TableCell>
                   <TableCell>{formatDateTime(transaction.date)}</TableCell>
                   <TableCell>
-                    <div>{transaction.userName}</div>
+                    <div>{transaction.customer_name}</div>
                     <div className="text-xs text-gray-500">
-                      {transaction.nfcCardId}
+                      {transaction.card_uid}
                     </div>
                   </TableCell>
                   <TableCell className="text-right font-medium">
