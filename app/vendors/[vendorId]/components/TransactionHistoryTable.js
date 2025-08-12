@@ -37,11 +37,8 @@ import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { useEffect } from "react";
 
-
-export default function TransactionHistoryTable({
-  transactions,
-}) {
-  console.log('transactions: ', transactions);
+export default function TransactionHistoryTable({ transactions }) {
+  console.log("transactions: ", transactions);
   const [searchTerm, setSearchTerm] = useState("");
   const [statusFilter, setStatusFilter] = useState("all");
   const [date, setDate] = useState();
@@ -53,18 +50,21 @@ export default function TransactionHistoryTable({
   // Filter the transactions based on search term, status, and date
   const filteredTransactions = transactions.filter((transaction) => {
     const matchesSearch =
-      transaction.customer_name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      transaction.customer_name
+        .toLowerCase()
+        .includes(searchTerm.toLowerCase()) ||
       transaction.card_uid.toLowerCase().includes(searchTerm.toLowerCase()) ||
       transaction.vendorId.toLowerCase().includes(searchTerm.toLowerCase());
 
-    const matchesStatus =
-      statusFilter === "all" || transaction.status === statusFilter;
+    // const matchesStatus =
+    //   statusFilter === "all" || transaction.status === statusFilter;
 
-    const matchesDate =
-      !date ||
-      new Date(transaction.date).toDateString() === date.toDateString();
+    // const matchesDate =
+    //   !date ||
+    //   new Date(transaction.date).toDateString() === date.toDateString();
 
-    return matchesSearch && matchesStatus && matchesDate;
+    return matchesSearch;
+    // return matchesSearch && matchesStatus && matchesDate;
   });
 
   // Calculate pagination
@@ -82,13 +82,13 @@ export default function TransactionHistoryTable({
 
   const getStatusBadge = (status) => {
     switch (status) {
-      case "completed":
+      case "true":
         return (
           <Badge className="bg-green-100 text-green-800 hover:bg-green-100">
             Completed
           </Badge>
         );
-      case "failed":
+      case "false":
         return (
           <Badge className="bg-red-100 text-red-800 hover:bg-red-100">
             Failed
@@ -146,9 +146,9 @@ export default function TransactionHistoryTable({
             </SelectTrigger>
             <SelectContent>
               <SelectItem value="all">All Status</SelectItem>
-              <SelectItem value="completed">Completed</SelectItem>
-              <SelectItem value="pending">Pending</SelectItem>
-              <SelectItem value="failed">Failed</SelectItem>
+              <SelectItem value="true">Completed</SelectItem>
+              {/* <SelectItem value="pending">Pending</SelectItem> */}
+              <SelectItem value="false">Failed</SelectItem>
             </SelectContent>
           </Select>
         </div>
@@ -162,7 +162,7 @@ export default function TransactionHistoryTable({
               <TableHead>Date & Time</TableHead>
               <TableHead>User / Card ID</TableHead>
               <TableHead className="text-right">Amount (₹)</TableHead>
-              <TableHead className="text-right">Balance (₹)</TableHead>
+              {/* <TableHead className="text-right">Balance (₹)</TableHead> */}
               <TableHead>Status</TableHead>
             </TableRow>
           </TableHeader>
@@ -171,9 +171,11 @@ export default function TransactionHistoryTable({
               paginatedTransactions.map((transaction) => (
                 <TableRow key={transaction._id} className="hover:bg-gray-50">
                   <TableCell className="font-medium">
-                    {transaction.id}
+                    {transaction._id}
                   </TableCell>
-                  <TableCell>{formatDateTime(transaction.date)}</TableCell>
+                  <TableCell>
+                    {/* {formatDateTime(transaction.date)} */}
+                  </TableCell>
                   <TableCell>
                     <div>{transaction.customer_name}</div>
                     <div className="text-xs text-gray-500">
@@ -181,10 +183,7 @@ export default function TransactionHistoryTable({
                     </div>
                   </TableCell>
                   <TableCell className="text-right font-medium">
-                    ₹{transaction.amount.toLocaleString()}
-                  </TableCell>
-                  <TableCell className="text-right">
-                    ₹{transaction.remainingBalance.toLocaleString()}
+                    ₹{transaction?.amount?.toLocaleString() || "0"}
                   </TableCell>
                   <TableCell>{getStatusBadge(transaction.status)}</TableCell>
                 </TableRow>

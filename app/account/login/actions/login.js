@@ -13,15 +13,6 @@ const VendorLoginSchema = z.object({
 export async function loginVendorAction(formData) {
   try {
     const data = Object.fromEntries(formData);
-    console.log("data", data);
-    // const validatedData = VendorLoginSchema.safeParse(data);
-    // console.log('validatedData: ', validatedData.data);
-    // if (!validatedData.success) {
-    //   return {
-    //     success: false,
-    //     message: validatedData.error.issues[0].message,
-    //   };
-    // }
 
     const response = await fetch(
       "https://nfcbackend-production.up.railway.app/api/event/login_admin",
@@ -49,27 +40,28 @@ export async function loginVendorAction(formData) {
     }
 
     // Store API response data in cookies
-    const cookieStore = cookies();
-    cookieStore.set("event_name", result.data.event_name, {
+  const cookieStore = await cookies();
+     cookieStore.set("event_name", result.data.event_name, {
       path: "/",
       httpOnly: true,
-      secure: true,
+      // secure: true,
       sameSite: "strict",
     });
-    cookieStore.set("event_id", result.data.event_id, {
+     cookieStore.set("event_id", result.data.event_id, {
       path: "/",
       httpOnly: true,
-      secure: true,
+      // secure: true,
       sameSite: "strict",
     });
-    cookieStore.set("email", result.data.email, {
+     cookieStore.set("email", result.data.email, {
       path: "/",
       httpOnly: true,
-      secure: true,
-      sameSite: "strict",
+      // secure: true,
+      sameSite: "strict", 
     });
 
-    revalidatePath("/vendors/list");
+
+    // revalidatePath("/vendors/list");
   } catch (error) {
     console.error("Error logging in vendor:", error);
     return {

@@ -6,13 +6,7 @@ import FormData from "form-data";
 
 // Adjust this function if you want to pass dynamic data from the client
 export async function createProductAction({ title, prices, vendorId, images }) {
-  console.log(
-    "title, prices, vendorId, images33333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333333: ",
-    title,
-    prices,
-    vendorId,
-    images
-  );
+
   const form = new FormData();
 
   // Form fields

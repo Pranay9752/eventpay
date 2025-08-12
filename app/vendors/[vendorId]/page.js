@@ -16,9 +16,7 @@ export default async function VendorDetailsPage({ params }) {
   const { vendorId } = await params;
   // Fetch data server-side
   const vendorDetails = await getVendorDetails(vendorId);
-  console.log("vendorDetails: ", vendorDetails);
   const transactions = await getVendorTransactions(vendorId);
-  console.log("transactions: ", transactions);
 
   return (
     <div className="container mx-auto p-6 space-y-6">
@@ -42,10 +40,10 @@ export default async function VendorDetailsPage({ params }) {
               </TabsContent>
 
               <TabsContent value="insights" className="lg:hidden">
-                {/* <FinancialInsights
-                  vendor={vendorDetails}
-                  transactions={transactions}
-                /> */}
+                <FinancialInsights
+                  vendor={vendorDetails?.data || {}}
+                  transactions={transactions?.data || []}
+                />
               </TabsContent>
             </Tabs>
           </Card>
@@ -55,10 +53,10 @@ export default async function VendorDetailsPage({ params }) {
 
         <div className="hidden lg:block">
           <Card className="p-6 shadow-md sticky top-6">
-            {/* <FinancialInsights
-              vendor={vendorDetails}
-              transactions={transactions}
-            /> */}
+            <FinancialInsights
+              vendor={vendorDetails?.data || {}}
+              transactions={transactions?.data || []}
+            />
           </Card>
         </div>
       </div>

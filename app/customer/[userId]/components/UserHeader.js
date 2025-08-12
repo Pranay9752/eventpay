@@ -1,3 +1,4 @@
+"use client"
 import React, { JSX } from "react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -33,9 +34,9 @@ import {
 
 const getStatusColor = (status) => {
   switch (status) {
-    case "active":
+    case true:
       return "bg-green-500";
-    case "inactive":
+    case false:
       return "bg-yellow-500";
     case "blocked":
       return "bg-red-500";
@@ -52,11 +53,11 @@ const getStatusColor = (status) => {
 
 const getStatusIcon = (status) => {
   switch (status) {
-    case "completed":
+    case "true":
       return <CheckCircle className="w-4 h-4 mr-1" />;
     case "pending":
       return <Clock className="w-4 h-4 mr-1" />;
-    case "failed":
+    case "false":
       return <XCircle className="w-4 h-4 mr-1" />;
     default:
       return null;
@@ -84,12 +85,9 @@ export const UserHeader = ({
       <div className="flex items-center space-x-4 mb-4 md:mb-0">
         <div className="relative">
           <Avatar className="h-20 w-20 border-4 border-white shadow-md">
-            <AvatarImage src={user.profileImage} alt={user.name} />
+            <AvatarImage src={user?.profileImage} alt={user?.name} />
             <AvatarFallback className="bg-white text-fuchsia-600 text-2xl">
-              {user.name
-                .split(" ")
-                .map((n) => n[0])
-                .join("")}
+              {user.name?.split(" ")?.map((n) => n[0])?.join("") || ""}
             </AvatarFallback>
           </Avatar>
           <span
@@ -102,21 +100,21 @@ export const UserHeader = ({
           <h1 className="text-2xl font-bold text-white">{user.name}</h1>
           <div className="flex items-center mt-1">
             <Badge className="bg-white/20 text-white mr-2">
-              {user.status.charAt(0).toUpperCase() + user.status.slice(1)}
+            {user.status ? "Active" : "In-active"}
             </Badge>
-            <span className="text-white/80 text-sm">ID: {user.id}</span>
+            <span className="text-white/80 text-sm">ID: {user.customerId}</span>
           </div>
         </div>
       </div>
       <div className="flex flex-wrap gap-2">
-        <Button
+        {/* <Button
           variant="outline"
           className="bg-white/10 text-white hover:bg-white/20 border-white/20 transition-all hover:scale-105"
           onClick={onResetNFCCard}
         >
           <RefreshCw className="mr-2 h-4 w-4" /> Reset NFC Card
-        </Button>
-        {user.status === "blocked" ? (
+        </Button> */}
+        {/* {user.status === "blocked" ? (
           <Button
             variant="outline"
             className="bg-white/10 text-white hover:bg-white/20 border-white/20 transition-all hover:scale-105"
@@ -132,7 +130,7 @@ export const UserHeader = ({
           >
             <AlertTriangle className="mr-2 h-4 w-4" /> Block User
           </Button>
-        )}
+        )} */}
       </div>
     </div>
   </div>
@@ -150,16 +148,16 @@ export const UserInfoCard = ({ user }) => (
       <dl className="space-y-4">
         <div>
           <dt className="text-sm font-medium text-gray-500">Email</dt>
-          <dd className="mt-1 text-sm">{user.email}</dd>
+          <dd className="mt-1 text-sm">{user?.email || ""}</dd>
         </div>
         <div>
           <dt className="text-sm font-medium text-gray-500">Phone</dt>
-          <dd className="mt-1 text-sm">{user.phone}</dd>
+          <dd className="mt-1 text-sm">{user?.phoneNo || ""}</dd>
         </div>
         <div>
           <dt className="text-sm font-medium text-gray-500">NFC Card ID</dt>
           <dd className="mt-1 text-sm font-mono bg-gray-100 p-1 rounded">
-            {user.nfcCardId}
+            {user?.card_uid || ""}
           </dd>
         </div>
         <div>
@@ -167,12 +165,12 @@ export const UserInfoCard = ({ user }) => (
             Registration Date
           </dt>
           <dd className="mt-1 text-sm">
-            {format(user.registrationDate, "PPP")}
+            {format(user.createdAt, "PPP")}
           </dd>
         </div>
         <div>
           <dt className="text-sm font-medium text-gray-500">Last Login</dt>
-          <dd className="mt-1 text-sm">{format(user.lastLogin, "PPP p")}</dd>
+          <dd className="mt-1 text-sm">{format(user.updatedAt, "PPP p")}</dd>
         </div>
       </dl>
     </CardContent>
@@ -232,27 +230,27 @@ export const FinancialSummary = ({ user }) => (
 
 export const TransactionsTable = ({
   transactions,
-  onExport,
+  // onExport,
 }) => (
   <div className="p-4 bg-white rounded-lg">
     <div className="flex justify-between items-center mb-4">
       <h3 className="font-semibold text-gray-800">Transaction History</h3>
       <div className="flex space-x-2">
-        <Button
+        {/* <Button
           variant="outline"
           size="sm"
           className="hover:bg-gray-100 transition-all"
         >
           <Filter className="h-4 w-4 mr-2" /> Filter
-        </Button>
-        <Button
+        </Button> */}
+        {/* <Button
           variant="outline"
           size="sm"
           className="hover:bg-gray-100 transition-all"
           onClick={onExport}
         >
           <Download className="h-4 w-4 mr-2" /> Export
-        </Button>
+        </Button> */}
       </div>
     </div>
 
@@ -264,40 +262,42 @@ export const TransactionsTable = ({
             <TableHead>Date & Time</TableHead>
             <TableHead>Vendor</TableHead>
             <TableHead>Amount</TableHead>
-            <TableHead>Balance</TableHead>
+            {/* <TableHead>Balance</TableHead> */}
             <TableHead>Status</TableHead>
           </TableRow>
         </TableHeader>
         <TableBody>
           {transactions.map((transaction) => (
-            <TableRow key={transaction.id} className="hover:bg-gray-50">
+            <TableRow key={transaction._id} className="hover:bg-gray-50">
               <TableCell className="font-mono text-xs">
-                {transaction.id}
+                {transaction._id}
               </TableCell>
               <TableCell>
-                {format(transaction.dateTime, "dd MMM yyyy, HH:mm")}
+                {format(transaction.createdAt, "dd MMM yyyy, HH:mm")}
               </TableCell>
               <TableCell>
                 <div>
-                  <div className="font-medium">{transaction.vendorName}</div>
+                  <div className="font-medium">{transaction.vendorId}</div>
                   <div className="text-xs text-gray-500">
-                    Terminal: {transaction.terminalId}
+                    Terminal: {transaction.card_uid}
                   </div>
                 </div>
               </TableCell>
               <TableCell className="font-medium">
-                ₹{transaction.amount}
+                ₹{transaction?.amount || 0}
               </TableCell>
-              <TableCell>₹{transaction.remainingBalance}</TableCell>
+              {/* <TableCell>₹{transaction.remainingBalance}</TableCell> */}
               <TableCell>
                 <div
-                  className={`flex items-center ${getStatusColor(
-                    transaction.status
-                  )}`}
+                  className={`flex items-center font-semibold ${
+                    transaction.status == "true"  ? "text-green-600" : "text-red-600"
+                  }`}
                 >
                   {getStatusIcon(transaction.status)}
-                  {transaction.status.charAt(0).toUpperCase() +
-                    transaction.status.slice(1)}
+                 
+                    {
+                      transaction.status == "true" ? "Completed" : "Failed"
+                    }
                 </div>
               </TableCell>
             </TableRow>
@@ -311,19 +311,18 @@ export const TransactionsTable = ({
 
 export const TopUpsTable = ({
   topUps,
-  onExport,
 }) => (
   <div className="p-4 bg-white rounded-lg">
     <div className="flex justify-between items-center mb-4">
       <h3 className="font-semibold text-gray-800">Top-Up History</h3>
-      <Button
+      {/* <Button
         variant="outline"
         size="sm"
         className="hover:bg-gray-100 transition-all"
         onClick={onExport}
       >
         <Download className="h-4 w-4 mr-2" /> Export
-      </Button>
+      </Button> */}
     </div>
 
     <div className="overflow-x-auto">

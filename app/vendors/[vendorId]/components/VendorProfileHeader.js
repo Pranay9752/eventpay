@@ -29,12 +29,12 @@ export default function VendorProfileHeader({ vendor }) {
         <div className="absolute top-6 right-6">
           <Badge
             className={`${
-              vendor.status === "active"
+              vendor.status 
                 ? "bg-green-100 text-green-800 hover:bg-green-100"
                 : "bg-red-100 text-red-800 hover:bg-red-100"
             } px-3 py-1 text-sm font-medium rounded-full`}
           >
-            {vendor.status === "active" ? "● Active" : "● Inactive"}
+            {vendor.status ? "● Active" : "● Inactive"}
           </Badge>
         </div>
       </div>
