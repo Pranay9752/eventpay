@@ -235,76 +235,83 @@ export const TransactionsTable = ({
   <div className="p-4 bg-white rounded-lg">
     <div className="flex justify-between items-center mb-4">
       <h3 className="font-semibold text-gray-800">Transaction History</h3>
-      <div className="flex space-x-2">
-        {/* <Button
-          variant="outline"
-          size="sm"
-          className="hover:bg-gray-100 transition-all"
-        >
-          <Filter className="h-4 w-4 mr-2" /> Filter
-        </Button> */}
-        {/* <Button
-          variant="outline"
-          size="sm"
-          className="hover:bg-gray-100 transition-all"
-          onClick={onExport}
-        >
-          <Download className="h-4 w-4 mr-2" /> Export
-        </Button> */}
-      </div>
     </div>
 
-    <div className="overflow-x-auto">
-      <Table>
-        <TableHeader>
-          <TableRow>
-            <TableHead>ID</TableHead>
-            <TableHead>Date & Time</TableHead>
-            <TableHead>Vendor</TableHead>
-            <TableHead>Amount</TableHead>
-            {/* <TableHead>Balance</TableHead> */}
-            <TableHead>Status</TableHead>
-          </TableRow>
-        </TableHeader>
-        <TableBody>
-          {transactions.map((transaction) => (
-            <TableRow key={transaction._id} className="hover:bg-gray-50">
-              <TableCell className="font-mono text-xs">
-                {transaction._id}
-              </TableCell>
-              <TableCell>
-                {format(transaction.createdAt, "dd MMM yyyy, HH:mm")}
-              </TableCell>
-              <TableCell>
-                <div>
-                  <div className="font-medium">{transaction.vendorName || ""}</div>
-                  <div className="text-xs text-gray-500">
-                    Terminal: {transaction.card_uid}
-                  </div>
-                </div>
-              </TableCell>
-              <TableCell className="font-medium">
-                ₹{transaction?.amount || 0}
-              </TableCell>
-              {/* <TableCell>₹{transaction.remainingBalance}</TableCell> */}
-              <TableCell>
-                <div
-                  className={`flex items-center font-semibold ${
-                    transaction.status == "true"  ? "text-green-600" : "text-red-600"
-                  }`}
-                >
-                  {getStatusIcon(transaction.status)}
-                 
-                    {
-                      transaction.status == "true" ? "Completed" : "Failed"
-                    }
-                </div>
-              </TableCell>
+    {transactions.length === 0 ? (
+      // Empty state when no transactions
+      <div className="flex flex-col items-center justify-center py-12 text-center">
+        <div className="w-16 h-16 mb-4 bg-gray-100 rounded-full flex items-center justify-center">
+          <svg
+            className="w-8 h-8 text-gray-400"
+            fill="none"
+            stroke="currentColor"
+            viewBox="0 0 24 24"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth={2}
+              d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"
+            />
+          </svg>
+        </div>
+        <h4 className="text-lg font-medium text-gray-900 mb-2">No Transactions Found</h4>
+        <p className="text-gray-500 max-w-sm">
+          This customer hasn't made any transactions yet. When they do, their transaction history will appear here.
+        </p>
+      </div>
+    ) : (
+      // Transaction table when transactions exist
+      <div className="overflow-x-auto">
+        <Table>
+          <TableHeader>
+            <TableRow>
+              <TableHead>ID</TableHead>
+              <TableHead>Date & Time</TableHead>
+              <TableHead>Vendor</TableHead>
+              <TableHead>Amount</TableHead>
+              {/* <TableHead>Balance</TableHead> */}
+              <TableHead>Status</TableHead>
             </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-    </div>
+          </TableHeader>
+          <TableBody>
+            {transactions.map((transaction) => (
+              <TableRow key={transaction._id} className="hover:bg-gray-50">
+                <TableCell className="font-mono text-xs">
+                  {transaction._id}
+                </TableCell>
+                <TableCell>
+                  {format(transaction.createdAt, "dd MMM yyyy, HH:mm")}
+                </TableCell>
+                <TableCell>
+                  <div>
+                    <div className="font-medium">{transaction.vendorName || ""}</div>
+                    <div className="text-xs text-gray-500">
+                      Terminal: {transaction.card_uid}
+                    </div>
+                  </div>
+                </TableCell>
+                <TableCell className="font-medium">
+                  ₹{transaction?.amount || 0}
+                </TableCell>
+                {/* <TableCell>₹{transaction.remainingBalance}</TableCell> */}
+                <TableCell>
+                  <div
+                    className={`flex items-center font-semibold ${
+                      transaction.status == "true" ? "text-green-600" : "text-red-600"
+                    }`}
+                  >
+                    {getStatusIcon(transaction.status)}
+                    {transaction.status == "true" ? "Completed" : "Failed"}
+                  </div>
+                </TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+      </div>
+    )}
   </div>
 );
 

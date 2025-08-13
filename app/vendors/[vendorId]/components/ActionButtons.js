@@ -28,10 +28,10 @@ export default function ActionButtons({ vendorId }) {
       </form> */}
 
       {/* Export Report (Handled on client, no backend needed) */}
-      <Button variant="outline" >
+      {/* <Button variant="outline" >
         <DownloadCloud className="mr-2 h-4 w-4" />
         Export Report
-      </Button>
+      </Button> */}
 
       {/* View Transactions (Handled on client, no backend needed) */}
       <Button variant="outline" >

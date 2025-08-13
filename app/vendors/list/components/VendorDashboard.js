@@ -604,7 +604,7 @@ export const VendorManagementDashboard = ({
             )}
             {viewMode === "table" ? "Card View" : "Table View"}
           </Button>
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex items-center gap-1">
                 <FileDown className="h-4 w-4" />
@@ -616,7 +616,7 @@ export const VendorManagementDashboard = ({
               <DropdownMenuItem>Export as PDF</DropdownMenuItem>
               <DropdownMenuItem>Print View</DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
         </div>
       </div>
 

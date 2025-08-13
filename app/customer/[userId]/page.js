@@ -135,7 +135,7 @@ export default async function UserDetailsPage({
               {/* Transactions Tab */}
               <TabsContent value="transactions" className="p-0">
                 <TransactionsTable
-                  transactions={transactions?.data}
+                  transactions={transactions?.data || []}
                   // onExport={onExportTransactions}
                 />
               </TabsContent>

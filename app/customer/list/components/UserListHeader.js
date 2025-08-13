@@ -13,10 +13,10 @@ export function UserListHeader() {
           className="pl-10 w-full"
         />
       </div>
-      <Button className="bg-indigo-600 hover:bg-indigo-700">
+      {/* <Button className="bg-indigo-600 hover:bg-indigo-700">
         <Download className="mr-2 h-4 w-4" />
         Export All
-      </Button>
+      </Button> */}
     </div>
   );
 }
