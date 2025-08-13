@@ -277,7 +277,7 @@ export const TransactionsTable = ({
               </TableCell>
               <TableCell>
                 <div>
-                  <div className="font-medium">{transaction.vendorId}</div>
+                  <div className="font-medium">{transaction.vendorName || ""}</div>
                   <div className="text-xs text-gray-500">
                     Terminal: {transaction.card_uid}
                   </div>

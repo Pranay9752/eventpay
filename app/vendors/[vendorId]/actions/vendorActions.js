@@ -14,6 +14,38 @@ export async function deactivateVendor(vendorId) {
   // Call API or database operation here
 }
 
+export async function getProductsByVendorId(vendorId) {
+  try {
+    if (!vendorId) {
+      throw new Error("Vendor ID is required");
+    }
+
+    const res = await fetch(
+      `https://nfcbackend-production.up.railway.app/product/getProductByVendorId?vendorId=${vendorId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        // Optional: If you want fresh data every time
+        cache: "no-store",
+      }
+    );
+
+    if (!res.ok) {
+      throw new Error(
+        `Failed to fetch products. Status: ${res.status} ${res.statusText}`
+      );
+    }
+
+    const data = await res.json();
+    return data;
+  } catch (error) {
+    console.error("Error fetching products by vendorId:", error);
+    throw error;
+  }
+}
+
 
 export async function getVendorDetails(vendorId) {
 

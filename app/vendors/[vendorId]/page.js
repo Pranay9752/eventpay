@@ -8,16 +8,19 @@ import TransactionHistoryTable from "./components/TransactionHistoryTable";
 import FinancialInsights from "./components/FinancialInsights";
 import ActionButtons from "./components/ActionButtons";
 import {
+  getProductsByVendorId,
   getVendorDetails,
   getVendorTransactions,
 } from "./actions/vendorActions";
+import ProductDetails from "./components/ProductDetails";
 
 export default async function VendorDetailsPage({ params }) {
   const { vendorId } = await params;
   // Fetch data server-side
   const vendorDetails = await getVendorDetails(vendorId);
   const transactions = await getVendorTransactions(vendorId);
-
+  const products = await getProductsByVendorId(vendorId);
+  console.log("products: ", products);
   return (
     <div className="container mx-auto p-6 space-y-6">
       <VendorProfileHeader vendor={vendorDetails?.data || {}} />
@@ -28,6 +31,7 @@ export default async function VendorDetailsPage({ params }) {
             <Tabs defaultValue="transactions" className="w-full">
               <TabsList className="mb-4">
                 <TabsTrigger value="transactions">Transactions</TabsTrigger>
+                <TabsTrigger value="products">Products</TabsTrigger>
                 <TabsTrigger value="insights" className="lg:hidden">
                   Financial Insights
                 </TabsTrigger>
@@ -37,6 +41,9 @@ export default async function VendorDetailsPage({ params }) {
                 <TransactionHistoryTable
                   transactions={transactions?.data || []}
                 />
+              </TabsContent>
+              <TabsContent value="products" className="space-y-4">
+                <ProductDetails products={products?.data} />
               </TabsContent>
 
               <TabsContent value="insights" className="lg:hidden">

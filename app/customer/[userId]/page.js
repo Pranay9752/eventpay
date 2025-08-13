@@ -91,16 +91,15 @@ export default async function UserDetailsPage({
 }) {
   const { userId } = await params;
   const user = await fetchCustomerDetails(userId);
+  console.log('user: ', user);
   const transactions = await fetchCustomerTransactions(userId)
+  console.log('transactions: ', transactions);
 
   return (
     <div className="container mx-auto p-4 m ax-w-6xl">
       {/* Header Section */}
       <UserHeader
         user={user || {}}
-        // onResetNFCCard={onResetNFCCard}
-        // onBlockUser={onBlockUser}
-        // onUnblockUser={onUnblockUser}
       />
 
       {/* Main Content - Two Column Layout */}

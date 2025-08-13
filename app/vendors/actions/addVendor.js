@@ -4,12 +4,10 @@ import { revalidatePath } from "next/cache";
 import { cookies } from "next/headers";
 
 export async function createVendor(vendorData) {
-  console.log(
-    "vendorData: ",
-    vendorData,
-    (await cookies()).get("event_id").value
-  );
   try {
+    const eventId = (await cookies()).get("event_id")?.value;
+    console.log("vendorData: ", vendorData, eventId);
+
     const response = await fetch(
       "https://nfcbackend-production.up.railway.app/vendor/createVendor",
       {
@@ -19,7 +17,7 @@ export async function createVendor(vendorData) {
         },
         body: JSON.stringify({
           ...vendorData,
-          event_id: (await cookies()).get("event_id").value,
+          event_id: eventId,
         }),
       }
     );
@@ -32,9 +30,6 @@ export async function createVendor(vendorData) {
         message: result.message || `HTTP error! status: ${response.status}`,
       };
     }
-
-    // Revalidate the vendors page to refresh the data
-    revalidatePath("/vendors/list");
 
     return {
       success: true,
@@ -53,22 +48,25 @@ export async function createVendor(vendorData) {
 
 export async function fetchVendors() {
   try {
+
+    const eventId = (await cookies()).get("event_id")?.value;
+
     const res = await fetch(
-      "https://nfcbackend-production.up.railway.app/api/vendor/list",
+      `https://nfcbackend-production.up.railway.app/api/vendor/list?event_id=${eventId}`,
       {
         method: "GET",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
+        cache: "no-store", // ✅ always fetch fresh data if needed
       }
     );
 
     if (!res.ok) throw new Error("Failed to fetch vendor list");
 
     const data = await res.json();
-    return data;
+    return data; // ✅ No revalidatePath here
   } catch (error) {
     console.error("Error fetching vendors:", error);
     return { error: "Could not fetch vendor list" };
   }
 }
+

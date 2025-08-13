@@ -47,7 +47,7 @@ export async function loginVendorAction(formData) {
       // secure: true,
       sameSite: "strict",
     });
-     cookieStore.set("event_id", result.data.event_id, {
+     cookieStore.set("event_id", result.data.admin_event_id, {
       path: "/",
       httpOnly: true,
       // secure: true,
@@ -61,7 +61,7 @@ export async function loginVendorAction(formData) {
     });
 
 
-    // revalidatePath("/vendors/list");
+    revalidatePath("/vendors/list");
   } catch (error) {
     console.error("Error logging in vendor:", error);
     return {
