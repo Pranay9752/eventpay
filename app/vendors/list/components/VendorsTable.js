@@ -66,14 +66,14 @@ export const VendorsTable = ({ vendors, handleSort, SortIcon }) => {
                 Sales <SortIcon field="totalSales" />
               </div>
             </TableHead>
-            <TableHead
+            {/* <TableHead
               className="cursor-pointer hover:text-indigo-600 transition-colors font-semibold"
               onClick={() => handleSort("pendingPayout")}
             >
               <div className="flex items-center">
                 Pending <SortIcon field="pendingPayout" />
               </div>
-            </TableHead>
+            </TableHead> */}
             <TableHead
               className="cursor-pointer hover:text-indigo-600 transition-colors font-semibold"
               onClick={() => handleSort("lastTransaction")}
@@ -82,14 +82,14 @@ export const VendorsTable = ({ vendors, handleSort, SortIcon }) => {
                 Last Activity <SortIcon field="lastTransaction" />
               </div>
             </TableHead>
-            <TableHead
+            {/* <TableHead
               className="cursor-pointer hover:text-indigo-600 transition-colors font-semibold"
               onClick={() => handleSort("status")}
             >
               <div className="flex items-center">
                 Status <SortIcon field="status" />
               </div>
-            </TableHead>
+            </TableHead> */}
             <TableHead>Actions</TableHead>
           </TableRow>
         </TableHeader>
@@ -120,9 +120,9 @@ export const VendorsTable = ({ vendors, handleSort, SortIcon }) => {
               </TableCell>
               <TableCell>{vendor.totalTransactions}</TableCell>
               <TableCell>{formatCurrency(vendor.totalSales)}</TableCell>
-              <TableCell>{formatCurrency(vendor.pendingPayout)}</TableCell>
+              {/* <TableCell>{formatCurrency(vendor.pendingPayout)}</TableCell> */}
               <TableCell>{formatDate(vendor.lastTransaction)}</TableCell>
-              <TableCell>
+              {/* <TableCell>
                 <Badge
                   className={`${
                     vendor.status === "active"
@@ -132,7 +132,7 @@ export const VendorsTable = ({ vendors, handleSort, SortIcon }) => {
                 >
                   {vendor.status === "active" ? "Active" : "Inactive"}
                 </Badge>
-              </TableCell>
+              </TableCell> */}
               <TableCell>
                 <div className="flex items-center gap-2">
                   <Popover>
@@ -156,10 +156,10 @@ export const VendorsTable = ({ vendors, handleSort, SortIcon }) => {
                           <span>{vendor.location}</span>
                           <span className="text-gray-500">Terminal ID:</span>
                           <span>{vendor.terminalId}</span>
-                          <span className="text-gray-500">Status:</span>
+                          {/* <span className="text-gray-500">Status:</span>
                           <span>
                             {vendor.status === "active" ? "Active" : "Inactive"}
-                          </span>
+                          </span> */}
                         </div>
                         <Separator />
                         <div className="flex justify-end">

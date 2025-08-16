@@ -36,6 +36,7 @@ import {
 import { Calendar } from "@/components/ui/calendar";
 import { format } from "date-fns";
 import { useEffect } from "react";
+import Link from "next/link";
 
 export default function TransactionHistoryTable({ transactions }) {
   console.log("transactions: ", transactions);
@@ -174,10 +175,10 @@ export default function TransactionHistoryTable({ transactions }) {
                     {transaction._id}
                   </TableCell>
                   <TableCell>
-                    {/* {formatDateTime(transaction.date)} */}
+                    {formatDateTime(transaction.createdAt)}
                   </TableCell>
                   <TableCell>
-                    <div>{transaction.customer_name}</div>
+                    <Link href={`/customer/${transaction.customerId}`} className="text-blue-800 font-semibold">{transaction.customer_name}</Link>
                     <div className="text-xs text-gray-500">
                       {transaction.card_uid}
                     </div>

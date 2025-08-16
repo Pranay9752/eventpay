@@ -590,20 +590,7 @@ export const VendorManagementDashboard = ({
       {/* View mode toggle */}
       <div className="flex justify-between items-center mb-6">
         <div className="flex items-center gap-2">
-          <Button
-            variant="outline"
-            className="flex items-center gap-1"
-            onClick={() =>
-              setViewMode(viewMode === "table" ? "cards" : "table")
-            }
-          >
-            {viewMode === "table" ? (
-              <TrendingUp className="h-4 w-4" />
-            ) : (
-              <ShoppingBag className="h-4 w-4" />
-            )}
-            {viewMode === "table" ? "Card View" : "Table View"}
-          </Button>
+          
           {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button variant="outline" className="flex items-center gap-1">
@@ -635,7 +622,7 @@ export const VendorManagementDashboard = ({
         </div>
 
         <div className="flex flex-wrap gap-2">
-          <DropdownMenu>
+          {/* <DropdownMenu>
             <DropdownMenuTrigger asChild>
               <Button
                 variant="outline"
@@ -665,7 +652,7 @@ export const VendorManagementDashboard = ({
                 Inactive
               </DropdownMenuItem>
             </DropdownMenuContent>
-          </DropdownMenu>
+          </DropdownMenu> */}
 
           <Sheet open={isFilterOpen} onOpenChange={setIsFilterOpen}>
             <SheetTrigger asChild>
@@ -784,22 +771,27 @@ export const VendorManagementDashboard = ({
               </SheetFooter>
             </SheetContent>
           </Sheet>
+
         </div>
+        <Button
+            variant="outline"
+            className="flex items-center gap-1"
+            onClick={() =>
+              setViewMode(viewMode === "table" ? "cards" : "table")
+            }
+          >
+            {viewMode === "table" ? (
+              <TrendingUp className="h-4 w-4" />
+            ) : (
+              <ShoppingBag className="h-4 w-4" />
+            )}
+            {viewMode === "table" ? "Card View" : "Table View"}
+          </Button>
       </div>
 
       {/* Tabs for different views */}
       <Tabs defaultValue="all" className="mb-6">
-        <TabsList className="grid w-full grid-cols-3 mb-4 bg-gray-100 dark:bg-gray-800 rounded-xl p-1">
-          <TabsTrigger value="all" className="rounded-lg">
-            All Vendors
-          </TabsTrigger>
-          <TabsTrigger value="active" className="rounded-lg">
-            Active
-          </TabsTrigger>
-          <TabsTrigger value="inactive" className="rounded-lg">
-            Inactive
-          </TabsTrigger>
-        </TabsList>
+        
 
         <TabsContent value="all">
           {viewMode === "table" ? (
@@ -811,36 +803,6 @@ export const VendorManagementDashboard = ({
             />
           ) : (
             <VendorCards vendors={currentVendors} />
-          )}
-        </TabsContent>
-
-        <TabsContent value="active">
-          {viewMode === "table" ? (
-            <VendorsTable
-              vendors={currentVendors.filter((v) => v.status === "active")}
-              handleSort={handleSort}
-              sortField={sortField}
-              SortIcon={SortIcon}
-            />
-          ) : (
-            <VendorCards
-              vendors={currentVendors.filter((v) => v.status === "active")}
-            />
-          )}
-        </TabsContent>
-
-        <TabsContent value="inactive">
-          {viewMode === "table" ? (
-            <VendorsTable
-              vendors={currentVendors.filter((v) => v.status === "inactive")}
-              handleSort={handleSort}
-              sortField={sortField}
-              SortIcon={SortIcon}
-            />
-          ) : (
-            <VendorCards
-              vendors={currentVendors.filter((v) => v.status === "inactive")}
-            />
           )}
         </TabsContent>
       </Tabs>

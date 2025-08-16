@@ -45,24 +45,24 @@ export default function FinancialInsights({ vendor, transactions }) {
           </div>
         </div>
 
-        <div className="grid grid-cols-2 gap-3 mb-4">
+        <div className="grid grid-cols-1 gap-3 mb-4">
           <MetricCard
             label="Average Transaction"
             value={`₹${avgTransactionValue.toFixed(2)}`}
           />
-          <MetricCard label="Most Active Time" value={mostActiveTime} />
+          {/* <MetricCard label="Most Active Time" value={mostActiveTime} /> */}
         </div>
       </div>
 
       <div>
         <h3 className="text-lg font-semibold mb-4">Payout Summary</h3>
-        <Card>
-          <CardContent className="p-4 space-y-3">
+        <Card className={'p-0'}>
+          <CardContent className="p-4 space-y-0">
             <div className="flex justify-between items-center">
               <span className="text-gray-600">Total Sales</span>
-              <span className="font-medium">₹{totalSales.toLocaleString()}</span>
+              <span className="font-medium text-green-800">₹{totalSales.toLocaleString()}</span>
             </div>
-            <div className="flex justify-between items-center">
+            {/* <div className="flex justify-between items-center">
               <span className="text-gray-600">Platform Fees (5%)</span>
               <span className="font-medium text-red-500">
                 -₹{platformFees.toLocaleString()}
@@ -86,7 +86,7 @@ export default function FinancialInsights({ vendor, transactions }) {
               >
                 {finalAmount > 0 ? "Pending" : "Completed"}
               </span>
-            </div>
+            </div> */}
           </CardContent>
         </Card>
       </div>

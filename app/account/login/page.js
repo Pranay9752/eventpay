@@ -129,7 +129,7 @@ export default function LoginPage() {
             </form>
           </CardContent>
 
-          <CardFooter className="flex justify-center border-t p-6">
+          {/* <CardFooter className="flex justify-center border-t p-6">
             <p className="text-center text-sm text-gray-600">
               {`Don't have an account? `}
               <Link
@@ -139,7 +139,7 @@ export default function LoginPage() {
                 Create one now
               </Link>
             </p>
-          </CardFooter>
+          </CardFooter> */}
         </Card>
 
         <div className="mt-8 text-center text-xs text-gray-500">

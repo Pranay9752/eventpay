@@ -20,7 +20,7 @@ export default async function VendorDetailsPage({ params }) {
   const vendorDetails = await getVendorDetails(vendorId);
   const transactions = await getVendorTransactions(vendorId);
   const products = await getProductsByVendorId(vendorId);
-  console.log("products: ", products);
+  console.log("products: ", transactions);
   return (
     <div className="container mx-auto p-6 space-y-6">
       <VendorProfileHeader vendor={vendorDetails?.data || {}} />

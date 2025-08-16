@@ -32,7 +32,7 @@ export const StatsCards = ({
   ];
 
   return (
-    <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+    <div className="grid grid-cols-2 md:grid-cols-3 gap-4 mb-8">
       {stats.map(({ title, value, icon, color }, index) => (
         <Card
           key={index}
