@@ -14,6 +14,7 @@ import {
   ShoppingBag,
   Zap,
   Crown,
+  Home,
 } from "lucide-react";
 import {
   Sidebar,
@@ -50,6 +51,17 @@ function LogoutButton({ icon: Icon, title }) {
 }
 
 const menuItems = [
+  {
+    title: "Home",
+    subtitle: "Manage Events",
+    url: "/events",
+    icon: Home,
+    gradient: "from-red-500 to-rose-500",
+    hoverGradient: "hover:from-red-50 hover:to-rose-50",
+    textColor: "text-red-600",
+    bgColor: "bg-red-100",
+    hoverBg: "group-hover:bg-red-200",
+  },
   {
     title: "Vendor Hub",
     subtitle: "Manage partners",
