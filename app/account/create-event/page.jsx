@@ -4,8 +4,7 @@ import { createEventAction } from "./actions/add-event";
 
 export default function CreateEventPage() {
   return (
-    <div className="min-h-screen bg-gradient-to-br from-indigo-100 via-pink-50 to-yellow-50 flex items-center justify-center p-6">
-      <div className="w-full max-w-xl rounded-2xl bg-white shadow-xl border border-slate-100 p-10">
+      <div className="">
         {/* Header */}
         <h1 className="text-3xl font-extrabold text-slate-800 mb-2">
           🎉 Create Your Event
@@ -112,6 +111,5 @@ export default function CreateEventPage() {
           </button>
         </form>
       </div>
-    </div>
   );
 }

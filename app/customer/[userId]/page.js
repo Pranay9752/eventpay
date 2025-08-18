@@ -68,18 +68,18 @@ const sampleTransactions = [
 ];
 
 const sampleTopUps = [
-  {
-    id: "TOP103",
-    dateTime: new Date("2024-02-28T09:30:00"),
-    amount: 2000,
-    method: "Credit Card",
-  },
-  {
-    id: "TOP102",
-    dateTime: new Date("2024-02-25T11:20:00"),
-    amount: 3000,
-    method: "UPI",
-  },
+  // {
+  //   id: "TOP103",
+  //   dateTime: new Date("2024-02-28T09:30:00"),
+  //   amount: 2000,
+  //   method: "Credit Card",
+  // },
+  // {
+  //   id: "TOP102",
+  //   dateTime: new Date("2024-02-25T11:20:00"),
+  //   amount: 3000,
+  //   method: "UPI",
+  // },
 ];
 export default async function UserDetailsPage({
   topUps = sampleTopUps,
@@ -124,12 +124,12 @@ export default async function UserDetailsPage({
                 >
                   <ShoppingBag className="h-4 w-4 mr-2" /> Transactions
                 </TabsTrigger>
-                {/* <TabsTrigger
+                <TabsTrigger
                   value="topups"
                   className="data-[state=active]:bg-gradient-to-r data-[state=active]:from-violet-500 data-[state=active]:to-fuchsia-500 data-[state=active]:text-white data-[state=active]:shadow-sm rounded-md"
                 >
                   <CreditCard className="h-4 w-4 mr-2" /> Top-Ups
-                </TabsTrigger> */}
+                </TabsTrigger>
               </TabsList>
 
               {/* Transactions Tab */}
@@ -142,7 +142,7 @@ export default async function UserDetailsPage({
 
               {/* Top-Ups Tab */}
               <TabsContent value="topups" className="p-0">
-                {/* <TopUpsTable topUps={topUps} onExport={onExportTransactions} /> */}
+                <TopUpsTable topUps={topUps} onExport={onExportTransactions} />
               </TabsContent>
             </Tabs>
           </Card>

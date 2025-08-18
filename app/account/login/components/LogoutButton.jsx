@@ -2,14 +2,15 @@
 
 import { useFormStatus } from 'react-dom';
 import {  Loader2 } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 
-function LogoutButton({ icon: Icon, title }) {
+function LogoutButton({ icon: Icon, title, className }) {
   const { pending } = useFormStatus();
   return (
     <button
       type="submit"
-      className="flex items-center space-x-2 w-full text-left hover:bg-gray-100 p-2 rounded"
+      className={cn("flex items-center space-x-2 w-full text-left hover:bg-gray-100 p-2 rounded", className)}
       disabled={pending}
     >
       {pending ? (

@@ -42,7 +42,7 @@ export async function createEventAction(formData) {
     //   };
     // }
 
-    
+    revalidatePath("/events")
   } catch (error) {
     console.error('Error creating event:', error);
     return {
@@ -52,5 +52,5 @@ export async function createEventAction(formData) {
   }
   
   // Redirect after successful event creation
-  redirect('/account/login');
+  // redirect('/events');
 }

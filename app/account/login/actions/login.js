@@ -61,7 +61,7 @@ export async function loginVendorAction(formData) {
     });
 
 
-    revalidatePath("/vendors/list");
+    revalidatePath("/events");
   } catch (error) {
     console.error("Error logging in vendor:", error);
     return {
@@ -69,5 +69,5 @@ export async function loginVendorAction(formData) {
       message: error instanceof Error ? error.message : "Failed to log in",
     };
   }
-  redirect("/vendors/list");
+  redirect("/events");
 }
